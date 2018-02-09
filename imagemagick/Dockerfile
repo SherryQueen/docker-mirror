@@ -1,5 +1,5 @@
 FROM daocloud.io/centos:latest
-MAINTAINER 56
+LABEL author="56"
 
 # 安装gcc 编译环境
 RUN yum install -y gcc automake autoconf libtool make
