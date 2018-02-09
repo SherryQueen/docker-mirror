@@ -9,8 +9,3 @@ RUN yum install -y libjpeg libjpeg-devel libpng libpng-devel libgomp
 
 # 安装Imagemagick
 RUN curl -O https://www.imagemagick.org/download/ImageMagick.tar.gz && tar vxzf ImageMagick.tar.gz && rm ImageMagick.tar.gz && cd ImageMagick-7.0.7-22 && ./configure && make && make install
-
-# 安装node 环境
-
-
-# 安装node-canvas 环境
