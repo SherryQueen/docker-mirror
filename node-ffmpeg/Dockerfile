@@ -117,5 +117,3 @@ RUN \
   hash -r && \
   # 清理
   yum clean all && rm -rf ~/ffmpeg_sources && \
-  # 添加ffmpeg 到环境变量
-  export PATH=$PATH:/root/bin
