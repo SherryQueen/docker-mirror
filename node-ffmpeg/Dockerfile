@@ -114,6 +114,6 @@ RUN \
   make && \
   make install && \
   make distclean && \
-  hash -r && \
+  hash -r
   # 清理
   yum clean all && rm -rf ~/ffmpeg_sources && \
