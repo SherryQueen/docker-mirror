@@ -1,5 +1,1 @@
-# path
-
-- Imagemagick
-- node8.9.4
-- node-canvas 依赖环境
+### 自己的一些 dockerfile配置
