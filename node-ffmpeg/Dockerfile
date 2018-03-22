@@ -22,7 +22,7 @@ RUN \
   cd ~/ffmpeg_sources && \
   git clone --depth 1 http://git.videolan.org/git/x264 && \
   cd x264 && \
-  PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static && \
+  PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg_build" --bindir="/bin" --enable-static && \
   make && \
   make install && \
   make clean && \
@@ -48,7 +48,7 @@ RUN \
   curl -O -L https://nchc.dl.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz && \
   tar xzvf lame-3.100.tar.gz && \
   cd lame-3.100 && \
-  ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --disable-shared --enable-nasm && \
+  ./configure --prefix="$HOME/ffmpeg_build" --bindir="/bin" --disable-shared --enable-nasm && \
   make && \
   make install && \
   make clean && \
@@ -93,14 +93,14 @@ RUN \
   curl -O -L https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
   tar xjvf ffmpeg-snapshot.tar.bz2 && \
   cd ffmpeg && \
-  PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
+  PATH="/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
   --prefix="$HOME/ffmpeg_build" \
   --pkg-config-flags="--static" \
   --extra-cflags="-I$HOME/ffmpeg_build/include" \
   --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
   --extra-libs=-lpthread \
   --extra-libs=-lm \
-  --bindir="$HOME/bin" \
+  --bindir="/bin" \
   --enable-gpl \
   --enable-libfdk_aac \
   --enable-libfreetype \
@@ -114,6 +114,11 @@ RUN \
   make && \
   make install && \
   make distclean && \
-  hash -r
+  hash -r && \
   # 清理
-  yum clean all && rm -rf ~/ffmpeg_sources && \
+  yum clean all && rm -rf ~/ffmpeg_sources
+
+# 挂载点
+VOLUME ["/app"]
+
+EXPOSE 3000
