@@ -1,0 +1,24 @@
+version: '3'
+services:
+  # docker 仓库
+  registry-srv:
+    container_name: registry-srv
+    image: registry
+    volumes: 
+      - registry-volume:/tmp/registry
+    ports:
+      - 5000:5000
+  # docker web 页面
+  registry-web:
+    container_name: registry-web
+    image: hyper/docker-registry-web
+    links:
+      - registry-srv
+    environment:
+      REGISTRY_URL: 'http://registry-srv:5000/v2'
+      REGISTRY_NAME: localhost:5000
+    ports:
+      - 8080:8080
+
+volumes:
+  registry-volume:

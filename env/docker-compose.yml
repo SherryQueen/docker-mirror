@@ -1,0 +1,38 @@
+version: '3'
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-volume:/data/db
+  
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - 6379:6379
+
+  postgreSQL:
+    container_name: postgreSQL
+    image: daocloud.io/library/postgres
+    environment:
+      POSTGRES_USER: ibustv
+      POSTGRES_PASSWORD: ibustv
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresql-volume:/var/lib/postgresql/data
+      
+  rabbitmq:
+    container_name: rabbitmq
+    image: daocloud.io/library/rabbitmq
+    ports:
+      - 5672:5672
+      - 5673:5673
+      - 15762:15762
+
+volumes:
+  mongo-volume:
+  postgresql-volume:
